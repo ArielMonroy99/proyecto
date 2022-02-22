@@ -21,10 +21,10 @@ Los inconvenientes que tiene el restaurante:
 
 ## Valor el valor que el proyecto va a dar a la empresa.
 Un metodo de comunicacion entre el cliente y el restaurante permitirá:
-1. Tangible
+- Tangible
     - Promocionar el restaurante.
     - Realizar el servicio de delivery
-2. Intangible 
+- Intangible 
     - Le será más sencillo a los clientes recibir la información deseada por lo que quedaron más satisfechos
     - Mejorará la comunicación del cliente con el restaurante 
 
