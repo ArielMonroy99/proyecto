@@ -35,54 +35,55 @@ Un metodo de comunicacion entre el cliente y el restaurante permitirá:
 
  ## Menu de Empleado
 
-    ```
-    Cli: Hola
-    Bot: Hola,selecciona una opción:
-    1. Ver menú
-    2. Ver información del restaurante 
-    3. Tu pedido
-    5. Salir
-    ```
-    Si selecciona la opción 1:
-    ```
-    Bot: (mostrar menu)
-    1. Entradas   
-    2. Platos fuertes
-    3. Postres
-    4. Bebidas
-    5. Menú del día
-    7. Promociones 
-    6. Terminar
-    #. Atrás 
-	
-	    Si se selecciona entradas: 
-	    Bot: (mostrar menu)
-        1. Tortilla de Acelga
-        2. Choclos a la parrilla con ají 
-        3. Falafel
-        @. Agregar al pedido
-        #. Atrás 
+```
+Cli: Hola
+Bot: Hola,selecciona una opción:
+1. Ver menú
+2. Ver información del restaurante 
+3. Tu pedido
+5. Salir
+```
+Si selecciona la opción 1:
+```
+Bot: (mostrar menu)
+1. Entradas   
+2. Platos fuertes
+3. Postres
+4. Bebidas
+5. Menú del día
+7. Promociones 
+6. Terminar
+#. Atrás 
 
-	        Si selecciona @ en el menú: 
-            Bot: Se agregó falafel a la orden 
-    ```
+Si se selecciona entradas: 
 
-    Si selecciona la opción 2:
+Bot: (mostrar menu)
+1. Tortilla de Acelga
+2. Choclos a la parrilla con ají 
+3. Falafel
+@. Agregar al pedido
+#. Atrás 
+
+Si selecciona @ en el menú: 
+Bot: Se agregó falafel a la orden 
+```
+
+Si selecciona la opción 2:
     
-    ```
-    Bot: seleccione una opción
-    Horarios de atención
-    Sucursales
-    Atrás
-    ```
+```
+Bot: seleccione una opción
+Horarios de atención
+Sucursales
+Atrás
+```
 
-    Si selecciona la opción 3
+Si selecciona la opción 3
 
-    ```
-    Bot: (mostrar menu)
-    1. Falafel x 2     
-    2. Fricase x 2 
-    3. Coca Cola 500ml x2 
-    @. Enviar Pedido
-    #. Atrás
-    ```
+```
+Bot: (mostrar menu)
+1. Falafel x 2     
+2. Fricase x 2 
+3. Coca Cola 500ml x2 
+@. Enviar Pedido
+#. Atrás
+```
