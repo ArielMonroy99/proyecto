@@ -6,5 +6,18 @@
 
  ## Problematica
  
- Vimos las dificultades de comunicación de un restaurante con el cliente, para mejorar la situación del restaurante se hará un bot para poder ayudar a mejorar la comunicación.
+ Vimos las dificultades de comunicación de un restaurante con el cliente, para mejorar la situación del restaurante se hará un bot para poder ayudar a mejorar la comunicación. 
+ El bot está enfocado a problemas comunes en restaurantes. No puede usar los servicios de delivery estándares por el costo de comisión que tiene las aplicaciones por ese motivo se utilizara el bot de telegram para poder realizar un servicio de delivery y dar información sobre el menú con el que cuenta.  
     
+
+
+
+
+## Valor el valor que el proyecto va a dar a la empresa.
+Un metodo de comunicacion entre el cliente y el restaurante permitirá:
+1. Tangible
+    - Promocionar el restaurante.
+    - Realizar el servicio de delivery
+2. Intangible 
+    - Le será más sencillo a los clientes recibir la información deseada por lo que quedaron más satisfechos
+    - Mejorará la comunicación del cliente con el restaurante 
