@@ -35,12 +35,12 @@ Un metodo de comunicacion entre el cliente y el restaurante permitirá:
 
  ## Menu de Empleado
 
-    `Cli: Hola
+   ```Cli: Hola
     Bot: Hola,selecciona una opción:
     1. Ver menú
     2. Ver información del restaurante 
     3. Tu pedido
-    5. Salir`
+    5. Salir```
 
 
 
