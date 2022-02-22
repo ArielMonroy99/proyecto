@@ -24,9 +24,23 @@ Un metodo de comunicacion entre el cliente y el restaurante permitirá:
 - Tangible
     - Promocionar el restaurante.
     - Realizar el servicio de delivery
+    - No poder saber informacion sobre el restaurante
 - Intangible 
     - Le será más sencillo a los clientes recibir la información deseada por lo que quedaron más satisfechos
     - Mejorará la comunicación del cliente con el restaurante 
+    - No poder promocionar el restaurante
+
+
+ ## Ejemplo de funcionamiento del BOT
+
+ ## Menu de Empleado
+
+    `Cli: Hola
+    Bot: Hola,selecciona una opción:
+    1. Ver menú
+    2. Ver información del restaurante 
+    3. Tu pedido
+    5. Salir`
 
 
 
