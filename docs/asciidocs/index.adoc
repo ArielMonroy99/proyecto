@@ -16,8 +16,7 @@ Para el personal de Restaurant:
 
 . El personal podra aceptar o rechazar pedidos 
 . El encargado debe poder modificar el menu que se muestra 
+. El personal podra realizar el cobro por medio de un codigo QR 
+. El personal de Restaurant podra configurar el menu de opciones que se muestran
 
 == Historias de Usuario
-
-
-
