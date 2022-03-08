@@ -1,0 +1,21 @@
+= Historias de Usuario
+
+== Introduccion
+
+Este documento presentara el detalle de todas las historias de usuario para la construccion de un bot de telegram para restaurantes.
+
+La funcionalidad proyectada para el bot sera: 
+
+Para los clientes: 
+
+. Los clientes pueden ver el menu
+. El cliente debe poder realizar pedidos
+. Los clientes pueden solicitar información sobre el restaurante
+
+Para el personal de Restaurant:
+
+. El personal podra aceptar o rechazar pedidos 
+. El encargado debe poder modificar el menu que se muestra 
+
+== Historias de Usuario
+
