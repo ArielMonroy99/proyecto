@@ -20,3 +20,51 @@ Para el personal de Restaurant:
 . El personal de Restaurant podra configurar el menu de opciones que se muestran
 
 == Historias de Usuario
+
+== 001-Notificacion de promociones
+
+*Autor*: Kevin Lecoña Marca
+
+*Fecha*: 08/03/2022
+
+*Propiedad*: MEDIA
+
+## Descripcion
+
+El `Dueño de restaurante` por medio del Bot crea un mensaje de promocion y añadiendo una imagen publicitaria, de no tener ambos no podra crear la promocion. Una vez enviada la promocion deberia llegar a todos los `clientes`, el cliente tendra la opcion de realizar el pedido de la promocion:
+
+La promocion pasara por los siguientes
+
+* *Realizar pedido*: El pedido sera enviado al restaurante
+* *Rechazar*: Rechazar pedido
+
+Diagrama de estados para la `PROMOCION` sera:
+
+[plantuml, format="png", id="estados-solicitud"]
+....
+@startuml
+[*] --> AGREGAR PROMOCION
+AGREGAR PROMOCION -> NO_VALIDA
+NO_VALIDA --> [*]
+[*] --> AGREGAR PROMOCION
+AGREGAR PROMOCION -> VALIDA
+AGRADO --> [*]
+@enduml
+....
+
+#### Escenarios
+
+1. Promocion enviada
+2. Promocion no enviada
+
+#### Caso de prueba
+
+*100.1.1 Promocion no enviada* 
+
+Descripción: La promocion no a sido enviada correctamente ya se por la falta de una descripcion o una imagen de dicha pormocion.
+
+Pasos:
+
+ 1. Ingresar al BOT via Telegram y enviar el comando /start
+    - Crear Promocion: Ninguno
+    - Resultado a esperar: El BOT retorna un mensaje de "introducir descripcion e imagen"
