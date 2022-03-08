@@ -68,3 +68,110 @@ Pasos:
  1. Ingresar al BOT via Telegram y enviar el comando /start
     - Crear Promocion: Ninguno
     - Resultado a esperar: El BOT retorna un mensaje de "introducir descripcion e imagen"
+
+== 002 - Recepcion de Pedidos 
+
+*Autor:* Ariel Monroy
+
+*Fecha:* 8/3/2022
+
+*Prioridad:* ALTA
+
+### Descripcion 
+
+El `Cliente` debe seleccionar los platos que el desee junto con las cantidades de estos por medio del menu del bot, despues debe añadir la ubicación para la entrega y finalmente enviar el `Pedido`. En el restaurant el `Encargado de Pedidos` debe verificar si el restaurant puede cumplir con el `Pedido` para que este sea aceptado o rechazado. En caso de que el `Pedido` sea aceptado se debe dar una hora estimada de llegada. Por otra parte si el `Pedido` fue rechazado el restaurant debe dar un comentario del porque. Además el `Cliente` puede cancelar el pedido antes de que este sea aceptado. 
+
+El Pedido pasará por los siguientes estados: 
+
+* *Enviado:* El pedido fue enviado para la revision por el `Encargado de pedidos` 
+* *Aceptado:* El pedido fue aceptado por el restaurante y procedera a ser preparado para el envio. 
+* *Rechazado:* El Pedido fue rechazado por el Restaurante.
+* *Cancelado:* El pedido fue Cancelado por el `Cliente` antes de ser aceptado por el restaurant 
+
+Diagrama de estados para el `Pedido`: 
+[plantuml, format="png, id="estados-pedido"]
+....
+@startuml
+[*] --> ENVIADO 
+ENVIADO --> ACEPTADO
+ENVIADO --> RECHAZADO
+ENVIADO --> CANCELADO
+ACEPTADO --> [*]
+RECHAZADO --> [*]
+CANCELADO--> [*]
+@enduml
+....
+
+#### Escenario
+. El pedido se rechaza por no poder cumplirlo en su totalidad
+. El pedido es aceptado
+. El pedido es cancelado
+. El pedido se envía
+
+#### Casos de Prueba
+
+*002.1.1* 
+
+Descripción: El pedido fue enviado pero el restaurante no puede cumplir con lo requerido por lo que rechaza el pedido.
+
+Pasos:
+    
+    .  Ingresar al bot y enviar el comando /start  y seleccionar los platos y la dirección para enviar el pedido. 
+
+    - Datos: Platos seleccionados y Dirección 
+
+   - Resultado: El bot retorna un mensaje de la confirmación de la recepción. 
+
+    .  Ingresar al bot y buscar la sección de pedidos recibidos y rechaza el pedido.
+
+    - Datos: Ninguno
+
+    - Resultado: El bot retorna un mensaje del plato que no puede ser preparado. 
+
+*002.1.2* 
+
+Descripción: El pedido fue enviado y aceptado por lo que se procede preparar y enviar.
+
+Pasos:
+
+    .  Ingresar al bot y enviar el comando /start  y seleccionar los platos y la dirección para enviar el pedido. 
+
+    - Datos: Platos seleccionados y Dirección 
+
+   - Resultado: El bot retorna un mensaje de la confirmación de la recepción. 
+
+
+    . Ingresar al bot y buscar la sección de pedidos recibidos y aceptar el pedido.
+
+    - Datos: Ninguno
+
+    - Resultado: El bot retorna un mensaje al cliente con una hora estimada de la llegada del pedido
+
+
+*002.1.3*
+
+Descripción: El pedido fue enviado, pero el cliente decide cancelarlo
+
+Pasos:
+
+    
+    .  Ingresar al bot y enviar el comando /start  y seleccionar los platos y la dirección para enviar el pedido. 
+    
+    - Datos: Platos seleccionados y Dirección 
+   El bot retorna un mensaje de la confirmación de la recepción. 
+
+    . Ingresar al pedido en curso dentro del bot y presionar el boton de cancelar
+
+    - Datos: Ninguno
+
+    - Resultado: El bot retorna un mensaje con una hora estimada de la llegada del pedido
+
+*002.1.4*
+
+Descripción: El pedido fue enviado y espera por la revisión.
+
+Pasos:
+
+    .  Ingresar al bot y enviar el comando /start  y seleccionar los platos y la dirección para enviar el pedido. 
+    - Datos: Platos seleccionados y Dirección 
+    - Resultado: El bot retorna un mensaje de la confirmación de la recepción. 
