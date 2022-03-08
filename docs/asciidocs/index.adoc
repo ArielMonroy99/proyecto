@@ -176,7 +176,7 @@ Pasos:
     - Datos: Platos seleccionados y Dirección 
     - Resultado: El bot retorna un mensaje de la confirmación de la recepción. 
 
-### 003 - Metodo de pago
+== 003 - Metodo de pago
 
 *Autor*: Ignacio Carvajal
 
@@ -184,7 +184,7 @@ Pasos:
 
 *Prioridad*: ALTA
 
-#### Descripción
+### Descripción
 
 Un `Cliente` debe solicitar el método de pago por medio del bot, para esto debe enviar los platos que desea solicitar. Una vez enviada la solicitud de los platos deseados un `Encargado del Restaurante` procederá a mandar un QR de cobro en caso de ser aceptado el pedido, en caso contrario no se le mandará el QR y se le mandará un mensaje de los platos que no se pueden mandar 
 
