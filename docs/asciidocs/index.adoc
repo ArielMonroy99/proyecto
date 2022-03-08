@@ -175,3 +175,99 @@ Pasos:
     .  Ingresar al bot y enviar el comando /start  y seleccionar los platos y la dirección para enviar el pedido. 
     - Datos: Platos seleccionados y Dirección 
     - Resultado: El bot retorna un mensaje de la confirmación de la recepción. 
+
+### 003 - Metodo de pago
+
+*Autor*: Ignacio Carvajal
+
+*Fecha*: 08/03/2022
+
+*Prioridad*: ALTA
+
+#### Descripción
+
+Un `Cliente` debe solicitar el método de pago por medio del bot, para esto debe enviar los platos que desea solicitar. Una vez enviada la solicitud de los platos deseados un `Encargado del Restaurante` procederá a mandar un QR de cobro en caso de ser aceptado el pedido, en caso contrario no se le mandará el QR y se le mandará un mensaje de los platos que no se pueden mandar 
+
+La solicitud pasará por los siguientes estados:
+
+* *SOLICITADO*: Cuando el cliente envía su solicitud al BOT y el BOT no la rechaza.
+* *APROBADO*: Solicitud aprobada por el encargado del Restaurante
+* *RECHAZADO*: Solicitud rechazada por el encargado del Restaurante
+* *PAGADO*: El cliente paga lo pedido
+* *CANCELADO*: El cliente canceló una solicitud APROBADA mientra no haya enviado el pago
+El diagrama de estados para la `SOLICITUD` será:
+
+[plantuml, format="png", id="estados-solicitud"]
+....
+@startuml
+[*] --> SOLICITADO
+SOLICITADO -> APROBADO
+SOLICITADO -> RECHAZADO
+RECHAZADO --> [*]
+APROBADO -> PAGADO
+APROBADO -> CANCELADO
+PAGADO --> [*]
+CANCELADO --> [*]
+@enduml
+....
+
+#### Escenarios
+1. El encargado del restaurante aprueba y manda el QR
+2. El encargado del restaurante rechaza y no manda el QR
+3. El cliente paga el pedido
+4. El cliente no paga el pedido
+5. El cliente cancela el pedido
+
+#### Casos de Prueba
+
+*003.1.1 Encargado manda el QR*
+
+Descripción: El encargado verifica la disponibilidad de los pedidos y una vez ve que todo lo que pidió esta disponible manda el QR
+
+Pasos:
+
+1. El cliente envia el pedido
+    - Datos: pedidos
+    - Resultado: El BOT retorna un mensaje. "*Manda QR*"
+
+*003.1.2 Encargado manda el QR*
+
+Descripción: El encargado verifica la disponibilidad del pedido y una vez ve que no hay disponibilidad de algunos pedidos rechaza el pedido y mandan mensaje de los pedidos no disponibles
+
+Pasos:
+
+1. El cliente envia el pedido
+    - Datos: platos
+    - Resultado: El BOT retorna un mensaje. "Los siguientes pedidos no estan disponibles: ...."
+
+*003.1.3 El cliente paga el pedido*
+
+Descripción: El encargado manda el QR y el cliente manda el comprobante de pago
+
+Pasos:
+
+1. El encargado envía el QR
+    - Datos: QR
+    - cliente: El cliente retorna un mensaje. "*Comprobante*"
+
+*003.1.4 El cliente no paga el pedido*
+
+Descripción: El encargado manda el QR y el cliente no manda el comprobante de pago y luego de un 10 minutos de no recibir el comprobante se cancela el pedido
+
+Pasos:
+
+1. El encargado envía el QR
+    - Datos: QR
+    - cliente: El cliente no retorna un mensaje.
+    -Bot: El pedido fue cancelado
+
+*003.1.5 El cliente cancela el pedido*
+
+Descripción: El encargado manda el QR y el cliente cancela el pedido
+
+Pasos:
+
+1. El encargado envía el QR
+    - Datos: QR
+    - cliente: El cliente retorna un mensaje. "Cancelo el pedido"
+    -Bot: El pedido fue cancelado
