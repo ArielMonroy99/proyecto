@@ -1,9 +1,0 @@
-@startuml
-[*] --> ENVIADO 
-ENVIADO --> ACEPTADO
-ENVIADO --> RECHAZADO
-ENVIADO --> CANCELADO
-ACEPTADO --> [*]
-RECHAZADO --> [*]
-CANCELADO--> [*]
-@enduml
