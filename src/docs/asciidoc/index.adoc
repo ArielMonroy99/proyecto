@@ -21,3 +21,65 @@ Para el personal de Restaurant:
 
 == Historias de Usuario
 
+== 001-Notificacion de promociones
+
+*Autor*: Kevin Lecoña Marca
+
+*Fecha*: 08/03/2022
+
+*Propiedad*: MEDIA
+
+## Descripcion
+
+El `Encargado` por medio del Bot puede crear un mensaje de promocion y enviar a sus clientes, para realizar el mensaje de promocion se requerira de un titulo, descripcion e imagen, Asi mismo el `Encargado` podra ver un listado de promociones que se crearon.
+
+
+La promocion pasara por los siguientes
+
+* *Realizar pedido*: El pedido sera enviado al restaurante
+* *Rechazar*: Rechazar pedido
+
+Diagrama de secuencia para crear y enviar una `PROMOCION` sera:
+
+[plantuml, format="png", id="estados-solicitud"]
+....
+@startuml
+
+actor encargado
+participant bot
+actor clientes
+encargado->bot: iniciar bot (/start)
+bot->encargado: Menu de opciones(Lista de pedidos/promociones/cambiar el menu)
+encargado->bot: promociones
+bot->encargado: (crear promocion/ listado de promociones)
+encargado->bot: crear promocion
+bot -> encargado: agregar Titulo, descripcion e imagen
+encargado -> bot: llenar datos
+bot->encargado: Promocion enviada a los clientes
+bot->clientes: enviar promocion
+@enduml
+....
+Diagrama de secuencia para ver el listado de promociones `PROMOCION` sera:
+
+[plantuml, format="png", id="estados-solicitud"]
+....
+@startuml
+
+actor encargado
+participant bot
+encargado->bot: iniciar bot (/start)
+bot->encargado: Menu de opciones(Lista de pedidos/promociones/cambiar el menu)
+encargado->bot: promociones
+bot->encargado: (crear promocion/ listado de promociones)
+encargado->bot: listado de promociones
+bot -> encargado: Mostrar todas las promociones creadas
+@enduml
+....
+
+#### Escenarios
+
+1. Promocion enviada
+2. Promocion no enviada
+3. Falta de descripcion
+4. Falta de imagen
+5. Falta de Titulo
