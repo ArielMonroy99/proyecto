@@ -122,25 +122,25 @@ Descripcion: La promocion se envio correctamente a todos los clientes
 
 Pasos:
 
-1. Ingresar al Bot enviando el mensaje /start
-Resultado: Selecione una opcion
+. Ingresar al Bot enviando el mensaje /start
+Resultado: Selection una option
 - Lista de pedidos
 - Promociones
 - Cambiar el menu
-2. Ingresa a la opcion de menu
-Resultado: Selecione una opcion
-- Crear promocion
+. Ingresa a la opción de menu
+Resultado: Seleccione una opción
+- Crear promoción
 - Lista de promociones
-3. El `ENCARGADO` crear una promocion /crear
-- datos /crear
+. El `ENCARGADO` crear una promoción /crear
+- Datos /crear
 - resultado ingrese Titulo
-4. El `ENCARGADO` coloca el titulo para la promocion
+. El `ENCARGADO` coloca el título para la promocion
 - datos /Titulo
 - resultado /Ingrese descripcion
-5. El `ENCARGADO` coloca una descripcion
+. El `ENCARGADO` coloca una descripcion
 - datos /descripcion
 - resultado /selecione una imagen
-6. El `ENCARGADO` coloca una imagen para la promocion
+. El `ENCARGADO` coloca una imagen para la promocion
 - datos /imagen
 - resultado /promocion enviada
 
@@ -152,10 +152,11 @@ Resultado: Selecione una opcion
 
 *Prioridad:* ALTA
 
-### Descripción
+=== Descripción
 
 El `Cliente` debe entrar menú desde la lista de opciones del bot, para seleccionar qué categoría de producto desea pedir, para añadir un productos a la lista del pedido el `Cliente` deberá clickear sobre el nombre del producto que desea pedir y el bot mandará un mensaje preguntando la cantidad que desea pedir, el `cliente` podrá retractarse de la orden presionando en cancelar antes de poner la cantidad que desee pedir, una vez enviado la cantidad el bot mandará un mensaje preguntando si desea hacer algún otro pedido en esta categoría o desea hacer algún pedido en otra categoría o desea ir a los pedidos, en caso de ir a los pedidos el `cliente` podrá ver la lista de los productos seleccionados, las cantidades, costo total y cuatro opciones: añadir producto, eliminar producto, editar producto y enviar pedido, añadir producto lo enviará al menú, eliminar producto te pedirá que ingreses el número del pedido que deseas eliminar, editar producto te pedirá que ingreses el número del pedido que deseas editar y enviar pedido mandara la lista al `Encargado`
-[plantuml, format="png", id="secuencia-adición"]
+
+[plantuml, format="png", id="secuencia-adicion"]
 ....
 @startuml
 actor Cliente
@@ -172,7 +173,7 @@ Bot -> BDD: Guarda en la lista
 @enduml
 ....
 
-[plantuml, format="png", id="secuencia-edición"]
+[plantuml, format="png", id="secuencia-edicion"]
 ....
 @startuml
 actor Cliente
@@ -189,7 +190,7 @@ Bot -> BDD: Guarda la lista
 @enduml
 ....
 
-[plantuml, format="png", id="secuencia-eliminación"]
+[plantuml, format="png", id="secuencia-eliminacion"]
 ....
 @startuml
 actor Cliente
@@ -206,13 +207,13 @@ Bot -> BDD: Guarda la lista
 @enduml
 ....
 
-#### Escenario
+=== Escenarios
 . El cliente agrega productos a su lista de pedido
 . El cliente edita productos de su lista de pedido
 . El cliente elimina productos de su lista de pedido
 . El cliente ingresa una cantidad inválida
 
-#### Casos de Prueba
+=== Casos de Prueba
 
 *002.1.1*  El cliente agrega productos a su lista de pedido
 
@@ -294,7 +295,7 @@ Pasos:
 - Datos: cantidad
 - Resultado: El bot retorna un mensaje “La cantidad ingresada es inválida por favor vuelva a ingresar una cantidad”.
 
-== 002 - Recepción de Pedidos
+== 003 - Recepción de Pedidos
 
 *Autor:* Ariel Monroy
 
@@ -332,7 +333,7 @@ CANCELADO --> [*]
 @enduml
 ....
 
-==== Escenario
+=== Escenario
 . El pedido se envía para ser revisado por el `Encargado`.
 . El `Encargado` del restaurante aprueba y manda el QR
 . El `Encargado` del restaurante rechaza el pedido
@@ -341,9 +342,9 @@ CANCELADO --> [*]
 . El `Cliente` cancela el pedido antes de ser aprobado
 . El `Cliente` cancela el pedido antes de realizar el pago
 
-==== Casos de Prueba
+=== Casos de Prueba
 
-*002.1.1* El pedido se envía para ser revisado por el `Encargado`.
+*003.1.1* El pedido se envía para ser revisado por el `Encargado`.
 
 Descripción: El pedido fue enviado y espera por la revisión del `Encargado`.
 
@@ -357,7 +358,7 @@ Pasos:
 - Datos: Dirección de entrega
 - Resultado: El bot retorna un mensaje de confirmación de la recepción.
 
-*002.1.2*  El `Encargado` del restaurante aprueba y manda el QR
+*003.1.2*  El `Encargado` del restaurante aprueba y manda el QR
 
 Descripción: El pedido fue enviado y aprobado por el ´Encargado´
 
@@ -373,9 +374,9 @@ Pasos:
 
 . El `Encargado` aprueba el pedido
 - Datos: Código QR
-- Resultado: El bot retorna un mensaje de confirmación del pedido, este contiene la hora   de estimada de llegada, el total del pedido incluyendo delivery y un QR para el pago .
+- Resultado: El bot retorna un mensaje de confirmación del pedido, este contiene la hora   de estimada de llegada, el total del pedido incluyendo delivery y un QR para el pago.
 
-*002.1.3* El `Encargado` del restaurante rechaza el pedido
+*003.1.3* El `Encargado` del restaurante rechaza el pedido
 
 Descripción: El pedido fue enviado y rechazado por el `Encargado`
 
@@ -393,7 +394,7 @@ Pasos:
 - Datos: Ninguno
 - Resultado: El bot retorna un mensaje  "Los siguientes productos no están disponibles: ...."
 
-*002.1.4*  El `Cliente` realiza el pago del pedido
+*003.1.4*  El `Cliente` realiza el pago del pedido
 
 Descripción: El pedido fue enviado y aprobado por el ´Encargado´, después este responde con un código QR para que se realice el pago del ´Pedido´.
 
@@ -415,7 +416,7 @@ Pasos:
 - Datos: Comprobante de pago
 - Resultado: El bot retorna un mensaje de confirmación, este contiene la hora   de     estimada de llegada.
 
-*002.1.5* El pedido se cancela por haber excedido el tiempo de pago
+*003.1.5* El pedido se cancela por haber excedido el tiempo de pago
 
 Descripción: El pedido fue enviado, pero el `Cliente` decide cancelarlo
 
@@ -441,7 +442,7 @@ Pasos:
 - Datos: Ninguno
 - Resultado: El bot retorna un mensaje “El pedido fue cancelado”.
 
-*002.1.6*  El `Cliente` cancela el pedido antes de ser aprobado
+*003.1.6*  El `Cliente` cancela el pedido antes de ser aprobado
 
 Descripción: El pedido fue enviado pero el `Cliente`  decide cancelarlo antes de que el `Encargado` lo apruebe.
 
@@ -459,7 +460,7 @@ Pasos:
 - Datos: Ninguno
 - Resultado: El bot retorna un mensaje de confirmación de la cancelación.
 
-*002.1.7* El `Cliente` cancela el pedido antes de realizar el pago
+*003.1.7* El `Cliente` cancela el pedido antes de realizar el pago
 
 Descripción: El pedido fue enviado, pero el `Cliente` decide cancelarlo
 
@@ -480,7 +481,7 @@ Pasos:
 - Datos: Ninguno
 - Resultado: El bot retorna un mensaje “El pedido fue cancelado”.
 
-== 003 - Modificar menu
+== 004 - Modificar menu
 
 *Autor:* Kevin Lecoña Marca
 
@@ -488,16 +489,16 @@ Pasos:
 
 *Prioridad:* ALTA
 
-=== Descripcion
+=== Descripción
 
-El `ENCARGADO` puede modificar el menu de restaurante que los `CLIENTES` podran ver para ordenar. Cuando ingrese a la opciones de Modificar Menu, el encargado podra visualizar todos los platos que tiene registrados en la base de datos y con un checkBox podra selecionar los platos que se vizualizar a los clientes.
+El `ENCARGADO` puede modificar el menu de restaurante que los `CLIENTES` podrán ver para ordenar. Cuando ingrese a las opciones de Modificar Menu, el encargado podrá visualizar todos los platos que tiene registrados en la base de datos y con un checkBox podrá seleccionar los platos que se visualizaran los clientes.
 
 La promoción pasará por los siguientes estados:
 
-- Selecion: Cuando el `ENCARGADO` selecione los platos del menu
-- actualizacion: Cuando se actualice el menu
+- Selección: Cuando el `ENCARGADO` seleccione los platos del menu
+- Actualización: Cuando se actualice el menu
 
-Diagrama de estado para la selecion de platos:
+Diagrama de estado para la selección de platos:
 
 [plantuml, format="png", id="estados-solicitud"]
 ....
@@ -519,50 +520,50 @@ bot -> clientes: Menu del dia
 @enduml
 ....
 
-== Escenarios
+=== Escenarios
 
-- Selecion de platos
-- Validacion de informacion
+- Selección de platos
+- Validación de información
 
-== Casos de Prueba
+=== Casos de Prueba
 
-*003.1.1 Selecion de platos*
+*004.1.1 Selección de platos*
 
-Descripcion: El `ENCARGADO` seleciona los platos para el menu
+Descripción: El `ENCARGADO` selecciona los platos para el menu
 
 Pasos:
 
 1. Ingresar al Bot enviando el mensaje /start
-data/ Selecionar una opcion
-Resultado: Selecione una opcion
+data/ Seleccionar una opción
+Resultado: Seleccione una opción
 - Lista de pedidos
 - Promociones
 - Cambiar el menu
-2. Ingresa a la opcion de Cambiar menu
+2. Ingresa a la opción de Cambiar menu
 - data /listado de platos del restaurante
-- respuesta/ selecione los platos
-3. El `ENCARGADO` seleciona los platos
-- datos /platos selecionados
+- respuesta/ seleccione los platos
+3. El `ENCARGADO` selecciona los platos
+- datos /platos seleccionados
 - resultado / publicar menu
-4. El `ENCARGADO` confirma la publicacion
-- datos /comfirmacion
+4. El `ENCARGADO` confirma la publicación
+- datos /confirmación
 - resultado /Menu publicado
 
-*003.1.2 Validacion de datos*
+*004.1.2 Validación de datos*
 
 Descripcion: valida que el menu no se publique sin ninguna informacion
 
 Pasos:
 
 1. Ingresar al Bot enviando el mensaje /start
-data /Selecionar una opcion
-Resultado: Selecione una opcion
+data /Seleccionar una opción
+Resultado: Seleccione una opción
 - Lista de pedidos
 - Promociones
 - Cambiar el menu
-2. Ingresa a la opcion de Cambiar menu
-- data /listado de platos del restaurante
-- respuesta/ selecione los platos
-3. El `ENCARGADO` seleciona los platos
-- datos /sin selecionar
-- resultado / tiene que selecionar los platos
+2. Ingresa a la opción de Cambiar menu
+- data: /listado de platos del restaurante
+- respuesta: /seleccione los platos
+3. El `ENCARGADO` selecciona los platos
+- datos: /sin seleccionar
+- resultado: / tiene que seleccionar los platos
