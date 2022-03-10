@@ -36,8 +36,8 @@ El `Encargado` por medio del Bot puede crear un mensaje de promoción y enviar a
 
 La promoción pasará por los siguientes
 
-* *Realizar pedido*: El pedido será enviado al restaurante
-* *Rechazar*: Rechazar pedido
+* *Crear promocion*: el proceso de creacion de la promocion
+* *Lista de promociones*: Verificacion que la promocion a sido enviada
 
 Diagrama de secuencia para crear y enviar una `PROMOCION` sera:
 
@@ -59,6 +59,7 @@ bot->encargado: Promocion enviada a los clientes
 bot->clientes: enviar promocion
 @enduml
 ....
+
 Diagrama de secuencia para ver el listado de promociones `PROMOCION` sera:
 
 [plantuml, format="png", id="estados-solicitud"]
@@ -84,7 +85,7 @@ bot -> encargado: Mostrar todas las promociones creadas
 
 === Caso de prueba
 
-*100.1.1 Validacion de datos*
+*001.1.1 Validacion de datos*
 
 Descripcion: La promocion no a sido enviada correctamente ya sea por problemas de conexion o cualquier otro problema
 
@@ -95,7 +96,7 @@ Resultado: Selecione una opcion
 - Lista de pedidos
 - Promociones
 - Cambiar el menu
-2. Ingresa a la opcion de menu
+2. Ingresa a la opcion de promocion
 Resultado: Selecione una opcion
 - Crear promocion
 - Lista de promociones
@@ -115,7 +116,7 @@ Resultado: Selecione una opcion
 - datos /descripcion
 - resultado /selecione una imagen
 
-*100.1.2 Promocion enviada*
+*001.1.2 Promocion enviada*
 
 Descripcion: La promocion se envio correctamente a todos los clientes
 
@@ -333,4 +334,89 @@ Pasos:
 . El `Cliente` cancela el pedido.
 - Datos: Ninguno
 - Resultado: El bot retorna un mensaje “El pedido fue cancelado”.
+
+== 003 - Modificar menu
+
+*Autor:* Kevin Lecoña Marca
+
+*Fecha:* 10/3/2022
+
+*Prioridad:* ALTA
+
+=== Descripcion
+
+El `ENCARGADO` puede modificar el menu de restaurante que los `CLIENTES` podran ver para ordenar. Cuando ingrese a la opciones de Modificar Menu, el encargado podra visualizar todos los platos que tiene registrados en la base de datos y con un checkBox podra selecionar los platos que se vizualizar a los clientes.
+
+La promoción pasará por los siguientes:
+
+- Selecion: Cuando el `ENCARGADO` selecione los platos del menu
+- actualizacion: Cuando se actualice el menu
+
+Diagrama de estado para la selecion de platos:
+
+[plantuml, format="png", id="estados-solicitud"]
+....
+@startuml
+
+actor encargado
+participant bot
+database DB
+actor clientes
+
+encargado->bot: iniciar bot (/start)
+bot->encargado: Menu de opciones(Lista de pedidos/promociones/cambiar el menu)
+encargado->bot: cambiar menu
+DB -> bot: Lista de platos
+bot->encargado: Selecione el menu del dia
+encargado->bot: Menu selecionado
+bot -> encargado: Se publico el menu
+bot -> clientes: Menu del dia
+@enduml
+....
+
+== Escenarios
+
+- Selecion de platos
+- Validacion de informacion
+
+== Casos de Prueba
+
+*003.1.1 Selecion de platos*
+
+Descripcion: El `ENCARGADO` seleciona los platos para el menu
+
+Pasos:
+
+1. Ingresar al Bot enviando el mensaje /start
+Resultado: Selecione una opcion
+- Lista de pedidos
+- Promociones
+- Cambiar el menu
+2. Ingresa a la opcion de Cambiar menu
+- data /listado de platos del restaurante
+- respuesta/ selecione los platos
+3. El `ENCARGADO` seleciona los platos
+- datos /platos selecionados
+- resultado / publicar menu
+4. El `ENCARGADO` confirma la publicacion
+- datos /comfirmacion
+- resultado /Menu publicado
+
+*003.1.2 Validacion de datos*
+
+Descripcion: valida que el menu no se publique sin ninguna informacion
+
+Pasos:
+
+1. Ingresar al Bot enviando el mensaje /start
+Resultado: Selecione una opcion
+- Lista de pedidos
+- Promociones
+- Cambiar el menu
+2. Ingresa a la opcion de Cambiar menu
+- data /listado de platos del restaurante
+- respuesta/ selecione los platos
+3. El `ENCARGADO` seleciona los platos
+- datos /sin selecionar
+- resultado / tiene que selecionar los platos
 
