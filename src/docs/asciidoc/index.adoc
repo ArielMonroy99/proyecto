@@ -79,14 +79,12 @@ bot -> encargado: Mostrar todas las promociones creadas
 === Escenarios
 
 1. Promoción enviada
-2. Promoción no enviada
-3. Falta de descripción
-4. Falta de imagen
-5. Falta de Titulo
+2. Validacion de datos
+
 
 === Caso de prueba
 
-*100.1.1 Promocion no enviada*
+*100.1.1 Validacion de datos*
 
 Descripcion: La promocion no a sido enviada correctamente ya sea por problemas de conexion o cualquier otro problema
 
@@ -107,7 +105,43 @@ Resultado: Selecione una opcion
 4. El `ENCARGADO` coloca espacios en blanco
 - datos /un espacio en blanco
 - resultado /El Bot le pide al encagado el titulo nuevamente
+5. El `ENCARGADO` coloca el titulo para la promocion
+- datos /Titulo
+- resultado /Ingrese descripcion
+6. El `ENCARGADO` coloca un espacion en blanco
+- datos /espacio en blanco
+- resultado /El Bot le pide al encargado la descripcion nuevamente
+7. El `ENCARGADO` coloca una descripcion
+- datos /descripcion
+- resultado /selecione una imagen
 
+*100.1.2 Promocion enviada*
+
+Descripcion: La promocion se envio correctamente a todos los clientes
+
+Pasos:
+
+1. Ingresar al Bot enviando el mensaje /start
+Resultado: Selecione una opcion
+- Lista de pedidos
+- Promociones
+- Cambiar el menu
+2. Ingresa a la opcion de menu
+Resultado: Selecione una opcion
+- Crear promocion
+- Lista de promociones
+3. El `ENCARGADO` crear una promocion /crear
+- datos /crear
+- resultado ingrese Titulo
+4. El `ENCARGADO` coloca el titulo para la promocion
+- datos /Titulo
+- resultado /Ingrese descripcion
+5. El `ENCARGADO` coloca una descripcion
+- datos /descripcion
+- resultado /selecione una imagen
+6. El `ENCARGADO` coloca una imagen para la promocion
+- datos /imagen
+- resultado /promocion enviada
 
 == 002 - Recepción de Pedidos
 
