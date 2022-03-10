@@ -84,6 +84,29 @@ bot -> encargado: Mostrar todas las promociones creadas
 4. Falta de imagen
 5. Falta de Titulo
 
+#### Caso de prueba
+
+*100.1.1 Promocion no enviada*
+
+Descripcion: La promocion no a sido enviada correctamente ya sea por problemas de conexion o cualquier otro problema
+
+Pasos:
+
+1. Ingresar al Bot enviando el mensaje /start
+Resultado: Selecione una opcion
+- Lista de pedidos
+- Promociones
+- Cambiar el menu
+2. Ingresa a la opcion de menu
+Resultado: Selecione una opcion
+- Crear promocion
+- Lista de promociones
+3. El `ENCARGADO` crear una promocion /crear
+- datos /crear
+- resultado ingrese Titulo
+4. El `ENCARGADO` coloca espacios en blanco
+- datos /un espacio en blanco
+- resultado /El Bot le pide al encagado el titulo nuevamente
 
 
 == 002 - Recepción de Pedidos
