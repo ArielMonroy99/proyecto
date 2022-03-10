@@ -36,7 +36,7 @@ Un metodo de comunicacion entre el cliente y el restaurante permitirá:
 
  ## Ejemplo de funcionamiento del BOT
 
- ## Menu de Empleado
+ ## Menu de Cliente
 
 ```
 Cli: Hola
