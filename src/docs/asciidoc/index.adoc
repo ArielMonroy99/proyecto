@@ -21,7 +21,7 @@ Para el personal de Restaurant:
 
 == Historias de Usuario
 
-== 001-Notificacion de promociones
+== 001-Notificación de promociones
 
 *Autor*: Kevin Lecoña Marca
 
@@ -29,14 +29,14 @@ Para el personal de Restaurant:
 
 *Propiedad*: MEDIA
 
-## Descripcion
+== Descripción
 
-El `Encargado` por medio del Bot puede crear un mensaje de promocion y enviar a sus clientes, para realizar el mensaje de promocion se requerira de un titulo, descripcion e imagen, Asi mismo el `Encargado` podra ver un listado de promociones que se crearon.
+El `Encargado` por medio del Bot puede crear un mensaje de promoción y enviar a sus clientes, para realizar el mensaje de promoción se requerirá de un título, descripción e imagen, Asi mismo el `Encargado` podrá ver un listado de promociones que se crearon.
 
 
-La promocion pasara por los siguientes
+La promoción pasará por los siguientes
 
-* *Realizar pedido*: El pedido sera enviado al restaurante
+* *Realizar pedido*: El pedido será enviado al restaurante
 * *Rechazar*: Rechazar pedido
 
 Diagrama de secuencia para crear y enviar una `PROMOCION` sera:
@@ -76,15 +76,15 @@ bot -> encargado: Mostrar todas las promociones creadas
 @enduml
 ....
 
-#### Escenarios
+=== Escenarios
 
-1. Promocion enviada
-2. Promocion no enviada
-3. Falta de descripcion
+1. Promoción enviada
+2. Promoción no enviada
+3. Falta de descripción
 4. Falta de imagen
 5. Falta de Titulo
 
-#### Caso de prueba
+=== Caso de prueba
 
 *100.1.1 Promocion no enviada*
 
@@ -117,7 +117,7 @@ Resultado: Selecione una opcion
 
 *Prioridad:* ALTA
 
-### Descripción
+=== Descripción
 
 El `Cliente` debe seleccionar los platos que él desee junto con las cantidades de estos por medio del menú del bot, después debe añadir la ubicación para la entrega y finalmente enviar el `Pedido` En el restaurante el `Encargado` debe verificar si el restaurante puede cumplir con el `Pedido` para que este sea aceptado o rechazado. En caso de que el `Pedido` sea aceptado  el pedido un `Encargado` procederá a mandar un QR y se dará una hora estimada de llegada. Por otra parte si el `Pedido` fue rechazado el restaurante debe dar un comentario de los productos que no se puedan enviar.
 Una vez que el `Cliente` realice el pago este debe mandar el comprobante al bot para que el `Pedido` sea preparado,el comprobante será verificado por el `Encargado`, en caso de que no se realice el pago antes de 10 minutos el bot cancelará automáticamente el `Pedido`.
@@ -149,7 +149,7 @@ CANCELADO --> [*]
 
 
 
-#### Escenario
+==== Escenario
 . El pedido se envía para ser revisado por el `Encargado`.
 . El `Encargado` del restaurante aprueba y manda el QR
 . El `Encargado` del restaurante rechaza el pedido
@@ -160,7 +160,7 @@ CANCELADO --> [*]
 
 
 
-#### Casos de Prueba
+==== Casos de Prueba
 
 *002.1.1* El pedido se envía para ser revisado por el `Encargado`.
 
@@ -233,12 +233,7 @@ Pasos:
 
 . El `Cliente` realiza el pago mediante el código QR y envía el comprobante de la transferencia para su revisión.
 - Datos: Comprobante de pago
-- Resultado: El bot retorna un mensaje de confirmación, este contiene la hora   de     estimada de llegada .
-
-
-
-
-
+- Resultado: El bot retorna un mensaje de confirmación, este contiene la hora   de     estimada de llegada.
 
 *002.1.5* El pedido se cancela por haber excedido el tiempo de pago
 
