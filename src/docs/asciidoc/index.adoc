@@ -347,7 +347,7 @@ Pasos:
 
 El `ENCARGADO` puede modificar el menu de restaurante que los `CLIENTES` podran ver para ordenar. Cuando ingrese a la opciones de Modificar Menu, el encargado podra visualizar todos los platos que tiene registrados en la base de datos y con un checkBox podra selecionar los platos que se vizualizar a los clientes.
 
-La promoción pasará por los siguientes:
+La promoción pasará por los siguientes estados:
 
 - Selecion: Cuando el `ENCARGADO` selecione los platos del menu
 - actualizacion: Cuando se actualice el menu
