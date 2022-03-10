@@ -34,7 +34,7 @@ Para el personal de Restaurant:
 El `Encargado` por medio del Bot puede crear un mensaje de promoción y enviar a sus clientes, para realizar el mensaje de promoción se requerirá de un título, descripción e imagen, Asi mismo el `Encargado` podrá ver un listado de promociones que se crearon.
 
 
-La promoción pasará por los siguientes
+La promoción pasará por los siguientes estados:
 
 * *Crear promocion*: el proceso de creacion de la promocion
 * *Lista de promociones*: Verificacion que la promocion a sido enviada
@@ -388,6 +388,7 @@ Descripcion: El `ENCARGADO` seleciona los platos para el menu
 Pasos:
 
 1. Ingresar al Bot enviando el mensaje /start
+data/ Selecionar una opcion
 Resultado: Selecione una opcion
 - Lista de pedidos
 - Promociones
@@ -409,6 +410,7 @@ Descripcion: valida que el menu no se publique sin ninguna informacion
 Pasos:
 
 1. Ingresar al Bot enviando el mensaje /start
+data /Selecionar una opcion
 Resultado: Selecione una opcion
 - Lista de pedidos
 - Promociones
