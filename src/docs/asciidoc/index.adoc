@@ -83,3 +83,200 @@ bot -> encargado: Mostrar todas las promociones creadas
 3. Falta de descripcion
 4. Falta de imagen
 5. Falta de Titulo
+
+
+
+== 002 - Recepción de Pedidos
+
+*Autor:* Ariel Monroy
+
+*Fecha:* 8/3/2022
+
+*Prioridad:* ALTA
+
+### Descripción
+
+El `Cliente` debe seleccionar los platos que él desee junto con las cantidades de estos por medio del menú del bot, después debe añadir la ubicación para la entrega y finalmente enviar el `Pedido` En el restaurante el `Encargado` debe verificar si el restaurante puede cumplir con el `Pedido` para que este sea aceptado o rechazado. En caso de que el `Pedido` sea aceptado  el pedido un `Encargado` procederá a mandar un QR y se dará una hora estimada de llegada. Por otra parte si el `Pedido` fue rechazado el restaurante debe dar un comentario de los productos que no se puedan enviar.
+Una vez que el `Cliente` realice el pago este debe mandar el comprobante al bot para que el `Pedido` sea preparado,el comprobante será verificado por el `Encargado`, en caso de que no se realice el pago antes de 10 minutos el bot cancelará automáticamente el `Pedido`.
+
+El Pedido pasará por los siguientes estados:
+* *ENVIADO:*Cuando el cliente envía su pedido al BOT para ser revisado por el Encargado.
+* *APROBADO*: Solicitud aprobada por el encargado del Restaurante
+* *RECHAZADO*: Solicitud rechazada por el encargado del Restaurante
+* *PAGADO*: El cliente realiza el pago
+* *CANCELADO*: El cliente cancela una solicitud aprobada si no realiza el pago dentro del límite de tiempo, o si decide cancelarla antes de sea aprobada.
+
+El diagrama de estados para  el `PEDIDO` será:
+
+[plantuml, format="png", id="estados-solicitud"]
+....
+@startuml
+[*] --> ENVIADO
+ENVIADO --> APROBADO
+ENVIADO --> RECHAZADO
+ENVIADO ---> CANCELADO
+RECHAZADO ---> [*]
+APROBADO --> PAGADO
+APROBADO -> CANCELADO
+PAGADO --> [*]
+CANCELADO --> [*]
+@enduml
+....
+
+
+
+#### Escenario
+. El pedido se envía para ser revisado por el encargado.
+. El encargado del restaurante aprueba y manda el QR
+. El encargado del restaurante rechaza el pedido
+. El cliente realiza el pago del pedido
+. El pedido se cancela por haber excedido el tiempo de pago
+. El cliente cancela el pedido antes de ser aprobado
+. El cliente cancela el pedido antes de realizar el pago
+
+
+
+#### Casos de Prueba
+
+*002.1.1* El pedido se envía para ser revisado por el encargado.
+
+Descripción: El pedido fue enviado y espera por la revisión del encargado.
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona los platos para el pedido
+- Datos: Platos seleccionados
+- Resultado: El bot retorna un mensaje pidiendo la dirección de entrega
+
+. El ´Cliente´ Ingresa la dirección para enviar el pedido.
+- Datos: Dirección de entrega
+- Resultado: El bot retorna un mensaje de confirmación de la recepción.
+
+
+*002.1.2*  El encargado del restaurante aprueba y manda el QR
+
+Descripción: El pedido fue enviado y aprobado por el ´Encargado´
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona los platos para el pedido
+- Datos: Platos seleccionados
+- Resultado: El bot retorna un mensaje pidiendo la dirección de entrega
+
+. El ´Cliente´ Ingresa la dirección para enviar el pedido.
+- Datos: Dirección de entrega
+- Resultado: El bot retorna un mensaje de confirmación de la recepción.
+
+. El ´Encargado´ aprueba el pedido
+- Datos: Código QR
+- Resultado: El bot retorna un mensaje de confirmación del pedido, este contiene la hora   de estimada de llegada, el total del pedido incluyendo delivery y un QR para el pago .
+
+*002.1.3* El encargado del restaurante rechaza el pedido
+
+Descripción: El pedido fue enviado y rechazado por el `Encargado`
+
+Pasos:
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona los platos para el pedido
+- Datos: Platos seleccionados
+- Resultado: El bot retorna un mensaje pidiendo la dirección de entrega
+
+. El ´Cliente´ Ingresa la dirección para enviar el pedido.
+- Datos: Dirección de entrega
+- Resultado: El bot retorna un mensaje de confirmación de la recepción.
+
+. El ´Encargado´ rechaza el pedido
+- Datos: Ninguno
+- Resultado: El bot retorna un mensaje  "Los siguientes productos no están disponibles: ...."
+
+*002.1.4*  El cliente realiza el pago del pedido
+
+Descripción: El pedido fue enviado y aprobado por el ´Encargado´, después este responde con un código QR para que se realice el pago del ´Pedido´.
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona los platos para el pedido
+- Datos: Platos seleccionados
+- Resultado: El bot retorna un mensaje pidiendo la dirección de entrega
+
+. El ´Cliente´ Ingresa la dirección para enviar el pedido.
+- Datos: Dirección de entrega
+- Resultado: El bot retorna un mensaje de confirmación de la recepción.
+
+. El ´Encargado´ aprueba el pedido
+- Datos: Código QR
+- Resultado: El bot retorna un mensaje de confirmación del pedido, el total del pedido incluyendo delivery y un QR para el pago.
+
+. El ´Cliente´ realiza el pago mediante el código QR y envía el comprobante de la transferencia para su revisión.
+- Datos: Comprobante de pago
+- Resultado: El bot retorna un mensaje de confirmación, este contiene la hora   de     estimada de llegada .
+
+
+
+
+
+
+*002.1.5* El pedido se cancela por haber excedido el tiempo de pago
+
+Descripción: El pedido fue enviado, pero el cliente decide cancelarlo
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona los platos para el pedido
+- Datos: Platos seleccionados
+- Resultado: El bot retorna un mensaje pidiendo la dirección de entrega
+
+. El ´Cliente´ Ingresa la dirección para enviar el pedido.
+- Datos: Dirección de entrega
+- Resultado: El bot retorna un mensaje de confirmación de la recepción.
+
+. El ´Encargado´ aprueba el pedido
+- Datos: Código QR
+- Resultado: El bot retorna un mensaje de confirmación del pedido, este contiene la hora   de estimada de llegada, el total del pedido incluyendo delivery y un QR para el pago .
+
+. El ´Bot´ manda notificaciones cada 5 minutos durante 11 minutos.
+- Datos: Ninguno
+- Resultado: El bot retorna mensajes de “Le quedan … minutos para mandar el comprobante de pago”.
+
+. El ´Cliente´ no manda el comprobante .
+- Datos: Ninguno
+- Resultado: El bot retorna un mensaje “El pedido fue cancelado”.
+
+*002.1.6*  El cliente cancela el pedido antes de ser aprobado
+
+Descripción: El pedido fue enviado pero el cliente ´Cliente´ decide cancelarlo antes de que el ´Encargado´ lo apruebe.
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona los platos para el pedido
+- Datos: Platos seleccionados
+- Resultado: El bot retorna un mensaje pidiendo la dirección de entrega
+
+. El ´Cliente´ Ingresa la dirección para enviar el pedido.
+- Datos: Dirección de entrega
+- Resultado: El bot retorna un mensaje de confirmación de la recepción.
+
+. El ´Cliente´ ingresa el comando para cancelar su pedido en curso
+- Datos: Ninguno
+- Resultado: El bot retorna un mensaje de confirmación de la cancelación.
+
+*002.1.7* El cliente cancela el pedido antes de realizar el pago
+
+Descripción: El pedido fue enviado, pero el cliente decide cancelarlo
+
+Pasos:
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona los platos para el pedido
+- Datos: Platos seleccionados
+- Resultado: El bot retorna un mensaje pidiendo la dirección de entrega
+
+. El ´Cliente´ Ingresa la dirección para enviar el pedido.
+- Datos: Dirección de entrega
+- Resultado: El bot retorna un mensaje de confirmación de la recepción.
+
+. El ´Encargado´ aprueba el pedido
+- Datos: Código QR
+- Resultado: El bot retorna un mensaje de confirmación del pedido, este contiene la hora   de estimada de llegada, el total del pedido incluyendo delivery y un QR para el pago .
+
+. El ´Cliente´ cancela el pedido.
+- Datos: Ninguno
+- Resultado: El bot retorna un mensaje “El pedido fue cancelado”.
+
