@@ -101,7 +101,7 @@ Una vez que el `Cliente` realice el pago este debe mandar el comprobante al bot 
 
 El Pedido pasará por los siguientes estados:
 
-* *ENVIADO:*Cuando el cliente envía su pedido al BOT para ser revisado por el `Encargado`.
+* *ENVIADO:* Cuando el cliente envía su `Pedido` al BOT para ser revisado por el `Encargado`.
 * *APROBADO*: Solicitud aprobada por el `Encargado` del Restaurante
 * *RECHAZADO*: Solicitud rechazada por el `Encargado` del Restaurante
 * *PAGADO*: El `Cliente` realiza el pago
