@@ -144,6 +144,156 @@ Resultado: Selecione una opcion
 - datos /imagen
 - resultado /promocion enviada
 
+== 002 - Adición de productos del menú al pedido
+
+*Autor:* Ignacio Carvajal
+
+*Fecha:* 10/3/2022
+
+*Prioridad:* ALTA
+
+### Descripción
+
+El `Cliente` debe entrar menú desde la lista de opciones del bot, para seleccionar qué categoría de producto desea pedir, para añadir un productos a la lista del pedido el `Cliente` deberá clickear sobre el nombre del producto que desea pedir y el bot mandará un mensaje preguntando la cantidad que desea pedir, el `cliente` podrá retractarse de la orden presionando en cancelar antes de poner la cantidad que desee pedir, una vez enviado la cantidad el bot mandará un mensaje preguntando si desea hacer algún otro pedido en esta categoría o desea hacer algún pedido en otra categoría o desea ir a los pedidos, en caso de ir a los pedidos el `cliente` podrá ver la lista de los productos seleccionados, las cantidades, costo total y cuatro opciones: añadir producto, eliminar producto, editar producto y enviar pedido, añadir producto lo enviará al menú, eliminar producto te pedirá que ingreses el número del pedido que deseas eliminar, editar producto te pedirá que ingreses el número del pedido que deseas editar y enviar pedido mandara la lista al `Encargado`
+[plantuml, format="png", id="secuencia-adición"]
+....
+@startuml
+actor Cliente
+participant Bot
+database BDD
+Cliente -> Bot: Solicitar el Menú
+Bot -> BDD: Realiza consulta del Menú
+Bot <- BDD: Envía datos sobre el Menú
+Cliente <- Bot: Muestra el Menú
+Cliente -> Bot: Selecciona producto
+Bot -> Cliente: "Ingrese Cantidad"
+Cliente -> Bot: Ingresa Cantidad
+Bot -> BDD: Guarda en la lista
+@enduml
+....
+
+[plantuml, format="png", id="secuencia-edición"]
+....
+@startuml
+actor Cliente
+participant Bot
+database BDD
+Cliente -> Bot: Solicita pedido actual
+Bot -> BDD: Solicita pedido
+Bot <- BDD: Envia datos del pedido
+Cliente <- Bot: Muestra datos del pedido
+Cliente -> Bot: Editar pedido
+Bot -> Cliente: "Ingrese nueva cantidad"
+Cliente -> Bot: Ingresa Cantidad
+Bot -> BDD: Guarda la lista
+@enduml
+....
+
+[plantuml, format="png", id="secuencia-eliminación"]
+....
+@startuml
+actor Cliente
+participant Bot
+database BDD
+Cliente -> Bot: Solicita pedido actual
+Bot -> BDD: Solicita pedido
+Bot <- BDD: Envia datos del pedido
+Cliente <- Bot: Muestra datos del pedido
+Cliente -> Bot: Eliminar producto del pedido
+Bot -> Cliente: "Ingrese producto"
+Cliente -> Bot: Ingresa producto
+Bot -> BDD: Guarda la lista
+@enduml
+....
+
+#### Escenario
+. El cliente agrega productos a su lista de pedido
+. El cliente edita productos de su lista de pedido
+. El cliente elimina productos de su lista de pedido
+. El cliente ingresa una cantidad inválida
+
+#### Casos de Prueba
+
+*002.1.1*  El cliente agrega productos a su lista de pedido
+
+Descripción: El cliente entra al menú selecciona la categoría y empieza a adicionar productos junto con la cantidad que desea del producto.
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona la opción menú
+- Datos: Ninguno
+- Resultado: El bot retorna un mensaje “A qué categoría desea ingresar”
+
+. El ́Cliente ́ ingresa a alguna categoría.
+- Datos: categoría
+- Resultado: El bot retorna un mensaje “Lista de productos:”.
+
+. El `cliente` Selecciona el producto que desea.
+- Datos: producto
+- Resultado: El bot retorna un mensaje “Cantidad que desea pedir:”.
+
+. El `cliente` Manda una cantidad
+- Datos: cantidad
+- Resultado: El bot retorna un mensaje “Se agregó exitosamente”.
+
+*002.1.2*  . El cliente edita productos de su lista de pedido
+
+Descripción: El Cliente ya adiciono platos a su pedido pero quiere editar las cantidades de estos
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, y entra la opción mi pedido y  selecciona los platos para el pedido
+- Datos: Ninguno
+- Resultado: El bot retorna la lista de todos los productos en su lista
+
+. El ´Cliente´ selecciona el producto que desea editar
+- Datos: Producto a editar
+- Resultado: El bot envía un mensaje pidiendo la cantidad nueva
+
+. El ´Cliente´ ingresa la nueva cantidad
+- Datos: Cantidad
+- Resultado: El bot devuelve un mensaje de confirmación de la edición
+
+*002.1.3*  . El cliente elimina productos de su lista de pedido
+
+Descripción: El Cliente ya adiciono platos a su pedido pero quiere eliminar cierto producto
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, y entra la opción mi pedido y  selecciona los platos para el pedido
+- Datos: Ninguno
+- Resultado: El bot retorna la lista de todos los productos en su lista
+
+. El ´Cliente´ selecciona el producto que desea eliminar
+- Datos: Producto a eliminar
+- Resultado: El bot envía un mensaje pidiendo una confirmación
+
+. El ´Cliente´ confirma la eliminación
+- Datos: Ninguno
+- Resultado: El bot devuelve un mensaje de confirmación de la eliminación
+
+*002.1.4*  . El cliente ingresa una cantidad inválida
+
+Descripción: El cliente entra al menú selecciona la categoría y empieza a adicionar productos pero la cantidad deseada no es válida.
+
+Pasos:
+
+.  El ´Cliente´ ingresa al bot, envía el comando /start y  selecciona la opción menú
+- Datos: Ninguno
+- Resultado: El bot retorna un mensaje “A qué categoría desea ingresar”
+
+. El cliente ingresa a alguna categoría.
+- Datos: categoría
+- Resultado: El bot retorna un mensaje “Lista de productos:”.
+
+. El `cliente` Selecciona el producto que desea.
+- Datos: producto
+- Resultado: El bot retorna un mensaje “Cantidad que desea pedir:”.
+
+. El `cliente` Manda una cantidad inválida.
+- Datos: cantidad
+- Resultado: El bot retorna un mensaje “La cantidad ingresada es inválida por favor vuelva a ingresar una cantidad”.
+
 == 002 - Recepción de Pedidos
 
 *Autor:* Ariel Monroy
@@ -182,8 +332,6 @@ CANCELADO --> [*]
 @enduml
 ....
 
-
-
 ==== Escenario
 . El pedido se envía para ser revisado por el `Encargado`.
 . El `Encargado` del restaurante aprueba y manda el QR
@@ -192,8 +340,6 @@ CANCELADO --> [*]
 . El pedido se cancela por haber excedido el tiempo de pago
 . El `Cliente` cancela el pedido antes de ser aprobado
 . El `Cliente` cancela el pedido antes de realizar el pago
-
-
 
 ==== Casos de Prueba
 
@@ -210,7 +356,6 @@ Pasos:
 . El `Cliente` Ingresa la dirección para enviar el pedido.
 - Datos: Dirección de entrega
 - Resultado: El bot retorna un mensaje de confirmación de la recepción.
-
 
 *002.1.2*  El `Encargado` del restaurante aprueba y manda el QR
 
@@ -421,4 +566,3 @@ Resultado: Selecione una opcion
 3. El `ENCARGADO` seleciona los platos
 - datos /sin selecionar
 - resultado / tiene que selecionar los platos
-
